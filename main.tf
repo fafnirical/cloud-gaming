@@ -71,6 +71,7 @@ resource "aws_instance" "gaming" {
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.gaming.id]
   subnet_id              = aws_subnet.gaming.id
+  key_name               = aws_key_pair.gaming.key_name
   get_password_data      = true
 
   tags = {
