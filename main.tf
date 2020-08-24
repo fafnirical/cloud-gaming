@@ -20,6 +20,27 @@ resource "aws_vpc" "gaming" {
   }
 }
 
+resource "aws_route_table" "gaming" {
+  vpc_id = aws_vpc.gaming.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gaming.id
+  }
+
+  tags = {
+    Name = "Gaming"
+  }
+}
+
+resource "aws_internet_gateway" "gaming" {
+  vpc_id = aws_vpc.gaming.id
+
+  tags = {
+    Name = "Gaming"
+  }
+}
+
 resource "aws_subnet" "gaming" {
   vpc_id                  = aws_vpc.gaming.id
   cidr_block              = "10.0.0.0/24"
